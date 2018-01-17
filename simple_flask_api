@@ -1,0 +1,23 @@
+# Import modules
+from flask_restful import Resource, Api
+from flask import Flask
+
+# Instantiate the Flask app object giving it the name of this file.
+# Instantiate Api object giving it the app object as argument
+app = Flask(__name__)
+api = Api(app)
+
+# This works without having to use "@app.route('/')" or similar.
+# Instantiate a class that retrieves the data somehow.
+class index():
+    def get(self):
+        return 'Hello, World!'
+
+
+# Now tell the Api which route is connected to the above class
+api.add_resource(index, '/index', '/')                               # Notice you can define more than one route.
+
+# Now run only if this file is run as main
+if __name__ == "__main__":
+    app.run(port = 5000)                                             # Sometimes this doesn't work. In that case, try "port = '5000'"
+      
